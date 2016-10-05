@@ -7,7 +7,9 @@ Notes from Stanford Machine Learning course
 * [Machine Learning Stanford](https://www.coursera.org/learn/machine-learning/home/welcome)
 * 
 
-### UofW / Coursera
+### UofW
+
+[Coursera](https://www.coursera.org/learn/ml-foundations/home/welcome?utm_medium=email&utm_source=other&utm_campaign=opencourse.qi9mnkIJEeWC4g7VhG4bTQ.opencourse.announcements~opencourse.qi9mnkIJEeWC4g7VhG4bTQ.instructorCourseStart)
 
 
 ### Udacity
