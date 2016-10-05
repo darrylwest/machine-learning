@@ -4,16 +4,23 @@
 // 2016.10.03
 'use strict';
 
-const trainingSet = {
+const trainingSetA = {
     xvector: [ 3, 2, 4, 0 ],
     yvector: [ 4, 1, 3, 1 ]
 };
+
+/*
+const trainingSetB = {
+    xvector: [ 1, 2, 2, 3, 3, 4, 5, 6, 6, 6, 8, 10 ], 
+    yvector: [
+};
+*/
 
 // calculate the cost for theta 0,1 against the training set...
 const calcCost = function(theta0, theta1, ts) {
 
     if (!ts) {
-        ts = trainingSet;
+        ts = trainingSetA;
     }
 
     const m = ts.xvector.length;
@@ -54,8 +61,8 @@ const q1 = function() {
         use m to denote the number of training examples.
     `;
 
-    const m = trainingSet.xvector.length;
-    console.log( m );
+    const m = trainingSetA.xvector.length;
+    console.log( `q1) m = ${m}`);
 
 };
 
@@ -65,24 +72,25 @@ const q2 = function() {
         What is J(0,1)? in the box below, please enter the answer (Simplify fractions to decimals when entering anser, and '.' as the delimiter, e.g. 1.5).
     `;
 
+    console.log(`q2) ${q}`);
     console.log(`cost = ${calcCost( 0, 1 )}`);
 
 };
 
 const q3 = function() {
-    const q = `Suppose we set θ0 = −1, θ1 = 0.5. What is hθ(4)?`;
 
-    const m = trainingSet.xvector.length;
-    const dr = (2 * m);
-    const sum = 1;
+    const theta0 = -2;
+    const theta1 = 0.5;
+    const x = 6; // trainingSet.xvector[3];
+    const y = theta0 + theta1 * x;
 
-    console.log( `m: ${m}, dr: ${dr}, sum: ${sum}` );
-    console.log( sum / dr );
-
-    console.log( `q3) J(-1,0.5) = ${sum / dr}` );
-
+    console.log(`q3) h(${x}) = ${theta0} + ${theta1} * ${x} = ${y}`);
 };
 
-// q1();
+
+q1();
 q2();
-// q3();
+q3();
+
+console.log( 'q4) check #3' );
+console.log( 'q5) check #2' );
