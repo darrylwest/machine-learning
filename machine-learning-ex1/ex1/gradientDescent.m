@@ -7,7 +7,7 @@ function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
 m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 
-DBUG = true;
+DBUG = false;
 
 for iter = 1:num_iters
 
@@ -22,21 +22,29 @@ for iter = 1:num_iters
 
     % first calc the delta then update theta vector
 
-    delta = 1 / (2 * m) * 2 * (X' * X * theta - X' * y);
+    delta = (X' * (X * theta - y)) / m;
     theta = theta - alpha * delta;
-
-    if DBUG == true && iter < 10,
-      fprintf('%d delta: %f\n', iter, delta(1,1));
-    end
-    
-    keyboard
 
 
     % ============================================================
 
     % Save the cost J in every iteration    
-    J_history(iter) = computeCost(X, y, theta);
+    cost = computeCost(X, y, theta);
+    J_history(iter) = cost;
+
+    if DBUG == true && (iter < 10 || iter > num_iters - 10),
+      fprintf('%d delta: %f, theta: %f,%f cost: %f\n', iter, delta(1,1), theta, cost);
+    end
 
 end
 
 end
+
+% unit tests...
+% [theta J_hist] = gradientDescent([1 5; 1 2; 1 4; 1 5],[1 6 4 2]',[0 0]',0.01,1000);
+% theta == 5.2148, -0.5733 
+%
+% [theta J_hist] = gradientDescent([1 5; 1 2],[1 6]',[.5 .5]',0.1,10);
+% theta == 1.70986, 0.19229
+% J_hist == 5.8853 5.7139 5.5475 ... 4.7861 4.6469, 4.5117
+
