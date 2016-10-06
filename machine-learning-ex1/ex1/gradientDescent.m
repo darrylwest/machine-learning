@@ -28,6 +28,8 @@ for iter = 1:num_iters
     if DBUG == true && iter < 10,
       fprintf('%d delta: %f\n', iter, delta(1,1));
     end
+    
+    keyboard
 
 
     % ============================================================
