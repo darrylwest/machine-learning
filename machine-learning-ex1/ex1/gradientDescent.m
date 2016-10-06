@@ -7,6 +7,8 @@ function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
 m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 
+DBUG = true;
+
 for iter = 1:num_iters
 
     % ====================== YOUR CODE HERE ======================
@@ -18,9 +20,14 @@ for iter = 1:num_iters
     %
 
 
+    % first calc the delta then update theta vector
 
+    delta = 1 / (2 * m) * 2 * (X' * X * theta - X' * y);
+    theta = theta - alpha * delta;
 
-
+    if DBUG == true && iter < 10,
+      fprintf('%d delta: %f\n', iter, delta(1,1));
+    end
 
 
     % ============================================================
