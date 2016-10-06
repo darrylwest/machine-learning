@@ -23,6 +23,10 @@ for iter = 1:num_iters
     % first calc the delta then update theta vector
 
     delta = (X' * (X * theta - y)) / m;
+
+    % taken from multi feature calc
+    % delta = 1 / (2 * m) * 2 * (X' * X * theta - X' * y);
+
     theta = theta - alpha * delta;
 
 
