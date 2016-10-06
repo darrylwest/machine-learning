@@ -16,4 +16,4 @@ function vectorizations()
 
     fprintf('vectorized prediction = %d\n', p2);
 
-end;
+end
