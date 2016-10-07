@@ -2,6 +2,7 @@ function ok = testComputeCosts()
 
     ok = true;
     check = 1E-6;
+    tests = 0;
 
     % X is the design matrix containing training data
     % y = is class label vector with the y values
@@ -11,6 +12,7 @@ function ok = testComputeCosts()
     theta = [ 0.1 ; 0.2 ];
 
     cost = computeCost( X, y, theta );
+    tests = tests + 1;
 
     fprintf('cost %f\n', cost);
 
@@ -26,6 +28,7 @@ function ok = testComputeCosts()
     cost = computeCost( X, y, theta );
 
     fprintf('cost %f\n', cost);
+    tests = tests + 1;
 
     if abs(cost - 7.0175) > check
       fprintf('cost failed...');
@@ -38,6 +41,7 @@ function ok = testComputeCosts()
     y = [ 1 ; 2 ; 3 ]; 
     theta = [ 0.0 ; 0.0 ];
     cost = computeCost( X, y, theta );
+    tests = tests + 1;
 
     fprintf('cost %f\n', cost);
 
@@ -49,6 +53,7 @@ function ok = testComputeCosts()
     
     theta = [ 0 ; 1 ];
     cost = computeCost( X, y, theta );
+    tests = tests + 1;
 
     fprintf('cost %f\n', cost);
 
@@ -60,7 +65,7 @@ function ok = testComputeCosts()
 
     % tests complete...
     if ok == true
-      fprintf('all tests passed!\n');
+      fprintf('%d tests passed!\n', tests);
     end
 
 end
