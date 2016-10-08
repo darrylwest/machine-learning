@@ -34,12 +34,7 @@ const run = function() {
     console.log( 'files: ', files );
     console.log( '------------------------------------ last run: ', new Date().toISOString() );
 
-    let iter = files.values();
-    const file = iter.next().value;
-    if (file) {
-        console.log( `run: ${file}` );
-        spawnJob( spawn( 'python', [ file ] ));
-    }
+    spawnJob( spawn( 'make', [ 'test' ] ));
 
     files.clear();
 };

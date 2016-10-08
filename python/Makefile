@@ -1,14 +1,15 @@
-FILES=src/*.py test/*.py
-TESTFILES=test/*.py
+# FILES=src/*.py test/*.py
+TESTFILES=Vector.py
+LINT=pylint --errors-only --rcfile .pylintrc
 
 all:
 	@make test
 
 lint:
-	@( echo "lint me..." )
+	@( $(LINT) $(TESTFILES) )
 
 test:
-	@( echo "test me..." )
+	@( python $(TESTFILES) )
 	@( make lint )
 
 watch:
