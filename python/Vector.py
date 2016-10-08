@@ -1,6 +1,8 @@
 
 """Vector utilities"""
 
+import math
+
 class Vector(object):
     """Vector class methods for simple vector operations"""
 
@@ -63,8 +65,7 @@ class Vector(object):
 
     def dot_product(self, vector):
         """return the dot product"""
-        print vector
-        return Vector(self.coordinates)
+        return sum([x * y for x, y in zip(self.coordinates, vector.coordinates)])
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
@@ -73,6 +74,11 @@ class Vector(object):
         return self.coordinates == vector.coordinates
 
 if __name__ == '__main__':
-    V = Vector([7.887, 4.138])
-    W = Vector([-8.802, 6.776])
-    print V, W, '.p: ', V.dot_product(W)
+    V = Vector([3.183, -7.627])
+    W = Vector([-2.668, 5.319])
+
+    print V, W, 'dot: ', V.dot_product(W)
+
+
+    # print 'times: ', math.acos( 2 / ( V.magnitude() * W.magnitude() ))
+    # print V, W, '.p: ', V.mag(W)
