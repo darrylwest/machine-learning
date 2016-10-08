@@ -1,4 +1,7 @@
 
+# @class Vector
+# dpw 2016-10-08
+
 class Vector(object):
     def __init__(self, coordinates):
         try:
@@ -36,7 +39,7 @@ class Vector(object):
         return sum(self.coordinates)
 
     def magnitude(self):
-        return pow( reduce((lambda x, y: x ** 2 + y ** 2), self.coordinates ), 0.5 )
+        return pow( reduce((lambda x, y: pow(x, 2) + pow(y, 2)), self.coordinates ), 0.5 )
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
@@ -50,5 +53,7 @@ if __name__ == '__main__':
 
     # print v.sqr()
     # print v.sum()
-    print v.magnitude()
+    print v, 'mag-> ', v.magnitude()
 
+    v = Vector([ 8.813, -1.331, -6.247 ])
+    print v, 'mag-> ', v.magnitude()
