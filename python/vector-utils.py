@@ -25,6 +25,19 @@ class Vector(object):
         coor = [ c*x * x in self.coordinates ]
         return Vector( coor )
 
+    def pow(self, n):
+        return Vector( map(lambda x: pow(x, n), self.coordinates) )
+
+    def sqr(self):
+        return self.pow( 2 )
+
+    def sum(self):
+        # return reduce((lambda x, y: x + y), self.coordinates )
+        return sum(self.coordinates)
+
+    def magnitude(self):
+        return pow( reduce((lambda x, y: x ** 2 + y ** 2), self.coordinates ), 0.5 )
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
@@ -32,9 +45,10 @@ class Vector(object):
         return self.coordinates == v.coordinates
 
 if __name__ == '__main__':
-    v = Vector([1, 2, 3])
+    v = Vector([ -1.221, 7.437 ])
     print v
 
-    v = v.plus(Vector([ 4, 5, 6]))
-    print v
+    # print v.sqr()
+    # print v.sum()
+    print v.magnitude()
 
