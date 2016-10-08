@@ -3,7 +3,7 @@
 import unittest
 import imp
 
-Vector = imp.load_source('Vector', './src/Vector.py')
+Vector = imp.load_source('Vector', './lib/Vector.py')
 
 from Vector import Vector
 
