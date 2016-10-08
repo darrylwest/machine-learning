@@ -24,22 +24,32 @@ class Vector(object):
         coor = [ x - y for x,y in zip(self.coordinates, v.coordinates)]
         return Vector( coor )
 
-    def times_scalar(self, c):
-        coor = [ c*x * x in self.coordinates ]
-        return Vector( coor )
+    def times(self, scalar):
+        return Vector([ scalar * x for x in self.coordinates ])
+
+    def divide(self, scalar):
+        return Vector( [ x / scalar for x in self.coordinates ])
 
     def pow(self, n):
-        return Vector( map(lambda x: pow(x, n), self.coordinates) )
+        return Vector( [ pow(x, n) for x in self.coordinates ] )
 
     def sqr(self):
         return self.pow( 2 )
 
     def sum(self):
-        # return reduce((lambda x, y: x + y), self.coordinates )
         return sum(self.coordinates)
 
     def magnitude(self):
-        return pow( reduce((lambda x, y: pow(x, 2) + pow(y, 2)), self.coordinates ), 0.5 )
+        # return pow( sum( map(lambda x: pow(x, 2), self.coordinates) ), 0.5)
+        return pow( sum([ x**2 for x in self.coordinates ]), 0.5 )
+
+    def direction(self):
+        try:
+            mag = self.magnitude()
+            return self.divide( mag )
+
+        except ZeroDivisionError:
+            raise Exception('cannot normalize the zero vector')
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
@@ -48,12 +58,15 @@ class Vector(object):
         return self.coordinates == v.coordinates
 
 if __name__ == '__main__':
-    v = Vector([ -1.221, 7.437 ])
-    print v
-
-    # print v.sqr()
-    # print v.sum()
+    v = Vector([ -0.221, 7.437 ])
     print v, 'mag-> ', v.magnitude()
+    print v, 'pow-> ', v.pow(2)
 
     v = Vector([ 8.813, -1.331, -6.247 ])
     print v, 'mag-> ', v.magnitude()
+
+    v = Vector([ 5.581, -2.136 ])
+    print v, 'dir->', v.direction()
+
+    v = Vector([1.996, 3.108, -4.554])
+    print v, 'dir->', v.direction()
