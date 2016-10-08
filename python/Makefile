@@ -1,12 +1,12 @@
-# FILES=src/*.py test/*.py
-TESTFILES=Vector.py
+FILES=src/*.py
+TESTFILES=test/*.py
 LINT=pylint --rcfile .pylintrc
 
 all:
 	@make test
 
 lint:
-	@( $(LINT) $(TESTFILES) )
+	@( $(LINT) $(FILES) )
 
 test:
 	@( python $(TESTFILES) )
