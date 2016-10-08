@@ -12,6 +12,8 @@ class Vector(object):
     __version__ = '0.90.10'
     __author__ = 'darryl.west@raincitysoftware.com'
 
+    ZERO = Decimal(0)
+
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -77,7 +79,6 @@ class Vector(object):
         try:
             dot = self.dot_product(vector)
             angle_r = acos(dot / (self.magnitude() * vector.magnitude()))
-            print 'angler: ', angle_r
 
             if in_degrees:
                 return degrees(angle_r)
@@ -86,6 +87,13 @@ class Vector(object):
 
         except Exception as ex:
             raise ex
+
+    def parallel(self, vector):
+        """return true if the two vectors are parallel"""
+        # pylint: disable=W0612
+        diff = self.dot_product(vector)
+
+        return True
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)

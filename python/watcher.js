@@ -31,6 +31,7 @@ const spawnJob = function( runner ) {
 };
 
 const run = function() {
+    console.log( '[H[2J' );
     console.log( 'files: ', files );
     console.log( '------------------------------------ last run: ', new Date().toISOString() );
 
@@ -53,8 +54,8 @@ const changeHandler = function( event, filename ) {
     }
 };
 
-fs.watch( './lib', {recursive: false}, changeHandler );
-fs.watch( './tests', {recursive: false}, changeHandler );
+fs.watch( './lib/', {recursive: false}, changeHandler );
+fs.watch( './tests/', {recursive: false}, changeHandler );
 
 console.log( 'watcher started...' );
 run();
