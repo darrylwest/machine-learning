@@ -53,7 +53,8 @@ const changeHandler = function( event, filename ) {
     }
 };
 
-fs.watch( './', {recursive: false}, changeHandler );
+fs.watch( './lib', {recursive: false}, changeHandler );
+fs.watch( './tests', {recursive: false}, changeHandler );
 
 console.log( 'watcher started...' );
 run();

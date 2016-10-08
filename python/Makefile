@@ -1,5 +1,5 @@
-FILES=src/*.py
-TESTFILES=test/*.py
+FILES=lib/*.py
+TESTFILES=tests/*.py
 LINT=pylint --rcfile .pylintrc
 
 all:
@@ -10,6 +10,7 @@ lint:
 
 test:
 	@( python $(TESTFILES) )
+	@( echo "linting..." )
 	@( make lint | tail -3)
 
 watch:
