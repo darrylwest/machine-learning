@@ -1,7 +1,10 @@
 
 """Vector utilities"""
 
-import math
+from decimal import Decimal, getcontext
+from math import acos, degrees, sqrt
+
+getcontext().prec = 30
 
 class Vector(object):
     """Vector class methods for simple vector operations"""
@@ -13,7 +16,8 @@ class Vector(object):
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple(coordinates)
+
+            self.coordinates = tuple(Decimal(x) for x in coordinates)
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -36,11 +40,11 @@ class Vector(object):
 
     def divide(self, scalar):
         """scalar divide"""
-        return Vector([x / scalar for x in self.coordinates])
+        return Vector([Decimal(x) / scalar for x in self.coordinates])
 
     def pow(self, num):
         """scalar power"""
-        return Vector([pow(x, num) for x in self.coordinates])
+        return Vector([pow(x, Decimal(num)) for x in self.coordinates])
 
     def sqr(self):
         """square the elements"""
@@ -52,7 +56,7 @@ class Vector(object):
 
     def magnitude(self):
         """return the vector's magnitude"""
-        return pow(sum([x**2 for x in self.coordinates]), 0.5)
+        return Decimal(sqrt(sum([x**2 for x in self.coordinates])))
 
     def direction(self):
         """return the vector direction"""
@@ -67,6 +71,22 @@ class Vector(object):
         """return the dot product"""
         return sum([x * y for x, y in zip(self.coordinates, vector.coordinates)])
 
+    def angle(self, vector, in_degrees=False):
+        """return the angle between two vectors in radians"""
+
+        try:
+            dot = self.dot_product(vector)
+            angle_r = acos(dot / (self.magnitude() * vector.magnitude()))
+            print 'angler: ', angle_r
+
+            if in_degrees:
+                return degrees(angle_r)
+            else:
+                return angle_r
+
+        except Exception as ex:
+            raise ex
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
@@ -76,9 +96,11 @@ class Vector(object):
 if __name__ == '__main__':
     V = Vector([3.183, -7.627])
     W = Vector([-2.668, 5.319])
+    print 'v mag: ', V.magnitude()
+    print 'w mag: ', W.magnitude()
+    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle(W)
 
-    print V, W, 'dot: ', V.dot_product(W)
+    V = Vector([7.35, 0.221, 5.188])
+    W = Vector([2.751, 8.259, 3.985])
 
-
-    # print 'times: ', math.acos( 2 / ( V.magnitude() * W.magnitude() ))
-    # print V, W, '.p: ', V.mag(W)
+    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle(W, True)

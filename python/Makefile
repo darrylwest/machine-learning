@@ -1,6 +1,6 @@
 # FILES=src/*.py test/*.py
 TESTFILES=Vector.py
-LINT=pylint --errors-only --rcfile .pylintrc
+LINT=pylint --rcfile .pylintrc
 
 all:
 	@make test
@@ -10,7 +10,7 @@ lint:
 
 test:
 	@( python $(TESTFILES) )
-	@( make lint )
+	@( make lint | tail -2)
 
 watch:
 	@( ./watcher.js )
