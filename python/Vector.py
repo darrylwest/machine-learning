@@ -96,8 +96,6 @@ class Vector(object):
 if __name__ == '__main__':
     V = Vector([3.183, -7.627])
     W = Vector([-2.668, 5.319])
-    print 'v mag: ', V.magnitude()
-    print 'w mag: ', W.magnitude()
     print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle(W)
 
     V = Vector([7.35, 0.221, 5.188])

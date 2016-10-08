@@ -10,7 +10,7 @@ lint:
 
 test:
 	@( python $(TESTFILES) )
-	@( make lint | tail -2)
+	@( make lint | tail -3)
 
 watch:
 	@( ./watcher.js )
