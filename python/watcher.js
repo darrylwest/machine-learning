@@ -61,5 +61,4 @@ const changeHandler = function( event, filename ) {
 fs.watch( './', {recursive: false}, changeHandler );
 
 console.log( 'watcher started...' );
-files.add('./vector-utils.py');
 run();
