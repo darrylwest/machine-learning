@@ -96,28 +96,27 @@ class VectorTests(unittest.TestCase):
         v2 = Vector(data.pop(0))
         self.assertTrue(v1.is_orthogonal_to(v2))
         
-    def test_parallel(self):
+    def test_is_parallel(self):
         """insure that the datasets are parallel or not"""
         
         data = self.create_parallel_orthogonal_data()
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        print 'debug: ', v1, v2
-        # print v1.angle_with(v2)
-        # self.assertTrue(v1.parallel_to(v2))
+        # print 'debug: ', v1, v2
+        self.assertTrue(v1.is_parallel_to(v2))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertFalse(v1.parallel_to(v2))
+        self.assertFalse(v1.is_parallel_to(v2))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertFalse(v1.parallel_to(v2))
+        self.assertFalse(v1.is_parallel_to(v2))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertTrue(v1.parallel_to(v2))
+        self.assertTrue(v1.is_parallel_to(v2))
 
 if __name__ == '__main__':
     unittest.main()

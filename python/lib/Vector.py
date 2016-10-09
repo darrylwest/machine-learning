@@ -12,6 +12,8 @@ class Vector(object):
     __version__ = '0.90.10'
     __author__ = 'darryl.west@raincitysoftware.com'
 
+    CANNOT_NORMALIZE_ZERO_VECTOR = 'Cannot normalize the zero vector'
+
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -58,6 +60,14 @@ class Vector(object):
         """return the vector's magnitude"""
         return Decimal(sqrt(sum([x**2 for x in self.coordinates])))
 
+    def normalized(self):
+        """nomalize the vector"""
+        try:
+            magnitude = self.magnitude()
+            return self.times(Decimal('1.0')/magnitude)
+        except ZeroDivisionError:
+            raise self.CANNOT_NORMALIZE_ZERO_VECTOR
+
     def direction(self):
         """return the vector direction"""
 
@@ -76,18 +86,26 @@ class Vector(object):
         """return the angle between two vectors in radians"""
 
         try:
-            dot = self.dot_product(vector)
-            angle = acos(dot / (self.magnitude() * vector.magnitude()))
+            uv1 = self.normalized()
+            uv2 = vector.normalized()
+
+            # acos throws if not roundedq
+            dot = round(uv1.dot_product(uv2), 14)
+
+            angle = acos(dot)
 
             if in_degrees:
                 return degrees(angle)
             else:
                 return angle
 
-        except Exception as ex:
-            raise ex
+        except ValueError as ex:
+            if str(ex) == self.CANNOT_NORMALIZE_ZERO_VECTOR:
+                raise Exception('Cannot compute an angle with a zero vector')
+            else:
+                raise ex
 
-    def parallel_to(self, vector):
+    def is_parallel_to(self, vector):
         """return true if the two vectors are parallel"""
 
         if self.is_zero() or vector.is_zero():
