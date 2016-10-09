@@ -12,8 +12,6 @@ class Vector(object):
     __version__ = '0.90.10'
     __author__ = 'darryl.west@raincitysoftware.com'
 
-    ZERO = Decimal(0)
-
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -62,6 +60,7 @@ class Vector(object):
 
     def direction(self):
         """return the vector direction"""
+
         try:
             mag = self.magnitude()
             return self.divide(mag)
@@ -78,12 +77,12 @@ class Vector(object):
 
         try:
             dot = self.dot_product(vector)
-            angle_r = acos(dot / (self.magnitude() * vector.magnitude()))
+            angle = acos(dot / (self.magnitude() * vector.magnitude()))
 
             if in_degrees:
-                return degrees(angle_r)
+                return degrees(angle)
             else:
-                return angle_r
+                return angle
 
         except Exception as ex:
             raise ex
@@ -91,7 +90,8 @@ class Vector(object):
     def parallel_to(self, vector):
         """return true if the two vectors are parallel"""
 
-        if self.is_zero() or vector.is_zero:
+        print self.is_zero(), vector.is_zero()
+        if self.is_zero() or vector.is_zero():
             return True
 
         angle = self.angle_with(vector)
@@ -108,17 +108,8 @@ class Vector(object):
         return self.magnitude() < tolerance
 
     def __str__(self):
-        return 'Vector: {}'.format(self.coordinates)
+        numbers = [round(x, 4) for x in self.coordinates]
+        return 'Vector: {}'.format(numbers)
 
     def __eq__(self, vector):
         return self.coordinates == vector.coordinates
-
-if __name__ == '__main__':
-    V = Vector([3.183, -7.627])
-    W = Vector([-2.668, 5.319])
-    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle_with(W)
-
-    V = Vector([7.35, 0.221, 5.188])
-    W = Vector([2.751, 8.259, 3.985])
-
-    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle_with(W, True)

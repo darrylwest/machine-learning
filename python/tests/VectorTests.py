@@ -22,6 +22,22 @@ class VectorTests(unittest.TestCase):
             [0, 0]
         ]
 
+    def create_dot_product_data(self):
+        return [
+            [7.887, 4.138],
+            [-8.802, 6.776],
+            [-5.955, -4.904, -1.874],
+            [-4.496, -8.755, 7.103]
+        ]
+
+    def create_angle_data(self):
+        return [
+            [3.183, -7.627],
+            [-2.668, 5.319],
+            [7.35, 0.221, 5.188],
+            [2.751, 8.259, 3.985]
+        ]
+
     def setUp(self):
         pass
     
@@ -36,8 +52,32 @@ class VectorTests(unittest.TestCase):
         w = Vector(v.coordinates)
         self.assertEqual(v, w)
 
+    def test_dot_product(self):
+        """tset the dot product"""
+        data = self.create_dot_product_data()
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.dot_product(v2), 3), -41.382)
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.dot_product(v2), 3), 56.397)
+
+    def test_angle_with(self):
+        """test the angle with"""
+        data = self.create_angle_data()
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.angle_with(v2), 3), 3.072)
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.angle_with(v2, True), 3), 60.276)
+
     def test_orthogonal(self):
-        """insure that the datasets are orthogonal"""
+        """insure that the datasets are orthogonal or not"""
         data = self.create_parallel_orthogonal_data()
 
         v1 = Vector(data.pop(0))
@@ -50,27 +90,26 @@ class VectorTests(unittest.TestCase):
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        # print 'angle: ', v1.dot_product(v2)
+        self.assertTrue(v1.is_orthogonal_to(v2))
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
         self.assertTrue(v1.is_orthogonal_to(v2))
         
-
     def test_parallel(self):
-        """insure that the datasets are parallel"""
+        """insure that the datasets are parallel or not"""
         
         data = self.create_parallel_orthogonal_data()
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-
-        # print v1, v2
+        # print v1.angle_with(v2)
         # self.assertTrue(v1.parallel_to(v2))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-
-        # print v1, v2
-        # self.assertTrue(v1.parallel_to(v2))
-
+        # print v1.angle_with(v2)
+        # self.assertFalse(v1.parallel_to(v2))
 
 if __name__ == '__main__':
     unittest.main()
