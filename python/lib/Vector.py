@@ -152,8 +152,18 @@ class Vector(object):
 
     def cross_product_of(self, vector):
         """calculate the cross product and return the vector"""
-        print self, vector
-        return Vector([0, 0, 0])
+        # first verify that self and vector are 3 dimensional
+        if self.dimension != 3 or vector.dimension != 3:
+            raise 'Cross product calculations are only valid for thee dimensional vectors'
+
+        scoor = self.coordinates
+        vcoor = vector.coordinates
+
+        return Vector([
+            scoor[1] * vcoor[2] - scoor[2] * vcoor[1],
+            scoor[2] * vcoor[0] - scoor[0] * vcoor[2],
+            scoor[0] * vcoor[1] - scoor[1] * vcoor[0]
+        ])
 
     def parallelogram_area_of(self, vector):
         """calculate the area of the parallelogram from vector"""

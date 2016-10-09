@@ -82,7 +82,7 @@ class VectorTests(unittest.TestCase):
         return [
             [1, -7, 1],
             [5, 2, 4],
-            [5, 3, 2],
+            [5, 3, -2],
             [-1, 0, 3],
             [8.462, 7.893, -8.187],
             [6.984, -5.975, 4.778],
@@ -268,19 +268,17 @@ class VectorTests(unittest.TestCase):
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
         xp = v1.cross_product_of(v2)
-        print 'v1/v2/xp: ', v1, v2, xp
-        # self.assertEqual(str(xp), str(Vector([-30, 1, 37])))
+        self.assertEqual(str(xp), str(Vector([-30, 1, 37])))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
         xp = v1.cross_product_of(v2)
-        print 'v1/v2/xp: ', v1, v2, xp
-        # self.assertEqual(str(xp), str(Vector[9, -13, 3]))
+        self.assertEqual(str(xp), str(Vector([9.0, -13.0, 3.0])))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
         xp = v1.cross_product_of(v2)
-        print 'v1/v2/xp: ', v1, v2, xp
+        self.assertEqual(str(xp), str(Vector([-11.2046, -97.6094, -105.6852])))
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
