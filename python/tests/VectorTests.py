@@ -30,6 +30,12 @@ class VectorTests(unittest.TestCase):
             [8.813, -1.331, -6.247]
         ]
 
+    def create_direction_data(self):
+        return [
+            [5.581, -2.136],
+            [1.996, 3.108, -4.554]
+        ]
+    
     def create_parallel_orthogonal_data(self):
         return [
             [-7.579, -7.88],
@@ -124,7 +130,13 @@ class VectorTests(unittest.TestCase):
     
     def test_direction(self):
         """test the vector direction"""
-        pass
+        data = self.create_direction_data()
+
+        v1 = Vector(data.pop(0))
+        self.assertEqual(str(v1.direction()), str(Vector([0.9339, -0.3574])))
+
+        v1 = Vector(data.pop(0))
+        self.assertEqual(str(v1.direction()), str(Vector([0.3404, 0.53, -0.7766])))
 
     def test_dot_product(self):
         """tset the dot product"""
