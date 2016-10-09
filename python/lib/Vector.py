@@ -13,6 +13,7 @@ class Vector(object):
     __author__ = 'darryl.west@raincitysoftware.com'
 
     CANNOT_NORMALIZE_ZERO_VECTOR = 'Cannot normalize the zero vector'
+    NO_UNIQUE_PARALLEL_COMPONENT = 'No unique parallel component'
 
     def __init__(self, coordinates):
         try:
@@ -100,11 +101,11 @@ class Vector(object):
             else:
                 return angle
 
-        except ValueError as ex:
-            if str(ex) == self.CANNOT_NORMALIZE_ZERO_VECTOR:
+        except ValueError as exe:
+            if str(exe) == self.CANNOT_NORMALIZE_ZERO_VECTOR:
                 raise Exception('Cannot compute an angle with a zero vector')
             else:
-                raise ex
+                raise exe
 
     def is_parallel_to(self, vector):
         """return true if the two vectors are parallel"""
@@ -123,6 +124,31 @@ class Vector(object):
     def is_zero(self, tolerance=1e-10):
         """return true if my vertor is very close to zero"""
         return self.magnitude() < tolerance
+
+    def component_orthogonal_to(self, basis):
+        """calculate the component orthogonal to basis"""
+        try:
+            proj = self.component_parallel_to(basis)
+            return self.minus(proj)
+
+        except ValueError as exe:
+            if str(exe) == self.NO_UNIQUE_PARALLEL_COMPONENT:
+                raise Exception(self.NO_UNIQUE_PARALLEL_COMPONENT)
+            else:
+                raise exe
+
+    def component_parallel_to(self, basis):
+        """calculate the component parallel to the basis"""
+        try:
+            uvec = basis.normalized()
+            weight = self.dot_product(uvec)
+            return uvec.times(weight)
+
+        except ValueError as exe:
+            if str(exe) == self.CANNOT_NORMALIZE_ZERO_VECTOR:
+                raise Exception(self.CANNOT_NORMALIZE_ZERO_VECTOR)
+            else:
+                raise exe
 
     def __str__(self):
         numbers = [round(x, 4) for x in self.coordinates]

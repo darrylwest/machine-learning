@@ -53,7 +53,9 @@ class VectorTests(unittest.TestCase):
             [7.887, 4.138],
             [-8.802, 6.776],
             [-5.955, -4.904, -1.874],
-            [-4.496, -8.755, 7.103]
+            [-4.496, -8.755, 7.103],
+            [1, 3, -2],
+            [-2, 4, -1]
         ]
 
     def create_angle_data(self):
@@ -61,7 +63,19 @@ class VectorTests(unittest.TestCase):
             [3.183, -7.627],
             [-2.668, 5.319],
             [7.35, 0.221, 5.188],
-            [2.751, 8.259, 3.985]
+            [2.751, 8.259, 3.985],
+            [1, 3, -2],
+            [-2, 4, -1]
+        ]
+    
+    def create_projection_data(self):
+        return [
+            [3.039, 1.879],
+            [0.825, 2.036],
+            [-9.88, -3.264, -8.159],
+            [-2.155, -9.353, -9.473],
+            [3.009, -6.172, 3.692, -2.51],
+            [6.404,-9.144, 2.759, 8.718]
         ]
 
     def setUp(self):
@@ -150,6 +164,10 @@ class VectorTests(unittest.TestCase):
         v2 = Vector(data.pop(0))
         self.assertEqual(round(v1.dot_product(v2), 3), 56.397)
 
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.dot_product(v2), 3), 12.0)
+
     def test_angle_with(self):
         """test the angle with"""
         data = self.create_angle_data()
@@ -161,6 +179,10 @@ class VectorTests(unittest.TestCase):
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
         self.assertEqual(round(v1.angle_with(v2, True), 3), 60.276)
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        self.assertEqual(round(v1.angle_with(v2, True), 3), 45.585)
 
     def test_orthogonal(self):
         """insure that the datasets are orthogonal or not"""
@@ -203,6 +225,28 @@ class VectorTests(unittest.TestCase):
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
         self.assertTrue(v1.is_parallel_to(v2))
+
+    def test_projection(self):
+        """test vector projection"""
+        data = self.create_projection_data()
+
+        vector = Vector(data.pop(0))
+        basis = Vector(data.pop(0))
+        para = vector.component_parallel_to(basis)
+        self.assertEqual(str(para), str(Vector([1.0826, 2.6717])))
+
+        vector = Vector(data.pop(0))
+        basis = Vector(data.pop(0))
+        perp = vector.component_orthogonal_to(basis)
+        self.assertEqual(str(perp), str(Vector([-8.3501, 3.3761, -1.4337])))
+
+        vector = Vector(data.pop(0))
+        basis = Vector(data.pop(0))
+        para = vector.component_parallel_to(basis)
+        perp = vector.component_orthogonal_to(basis)
+        self.assertTrue(str(para), str(Vector([1.9685, -2.8108, 0.8481, 2.6798])))
+        self.assertTrue(str(perp), str(Vector([1.0405, -3.3612, 2.8439, -5.1898])))
+
 
 if __name__ == '__main__':
     unittest.main()
