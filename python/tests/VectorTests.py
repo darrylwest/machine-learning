@@ -24,6 +24,12 @@ class VectorTests(unittest.TestCase):
             [1.671, -1.012, -0.318]
         ]
 
+    def create_magnitude_data(self):
+        return [
+            [-0.221, 7.437],
+            [8.813, -1.331, -6.247]
+        ]
+
     def create_parallel_orthogonal_data(self):
         return [
             [-7.579, -7.88],
@@ -104,7 +110,13 @@ class VectorTests(unittest.TestCase):
 
     def test_magnitude(self):
         """test vector's magnitude"""
-        pass
+        data = self.create_magnitude_data()
+
+        v1 = Vector(data.pop(0))
+        self.assertEqual(round(v1.magnitude(), 9), 7.440282925)
+
+        v1 = Vector(data.pop(0))
+        self.assertEqual(round(v1.magnitude(), 9), 10.884187567)
 
     def test_normalize(self):
         """test the normalization of a vector"""
