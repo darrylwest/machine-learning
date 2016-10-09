@@ -52,6 +52,46 @@ class VectorTests(unittest.TestCase):
         w = Vector(v.coordinates)
         self.assertEqual(v, w)
 
+    def test_plus(self):
+        """test vector addition"""
+        pass
+
+    def test_minus(self):
+        """test vector subtraction"""
+        pass
+
+    def test_times(self):
+        """test vector scalar multiplication"""
+        pass
+
+    def test_divide(self):
+        """test vector scalar division"""
+        pass
+
+    def test_pow(self):
+        """test vector raised to the power of n"""
+        pass
+
+    def test_sqr(self):
+        """test vector squared"""
+        pass
+
+    def test_sum(self):
+        """test vector summation"""
+        pass
+
+    def test_magnitude(self):
+        """test vector's magnitude"""
+        pass
+
+    def test_normalize(self):
+        """test the normalization of a vector"""
+        pass
+    
+    def test_direction(self):
+        """test the vector direction"""
+        pass
+        
     def test_dot_product(self):
         """tset the dot product"""
         data = self.create_dot_product_data()
