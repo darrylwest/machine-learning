@@ -150,6 +150,16 @@ class Vector(object):
             else:
                 raise exe
 
+    def cross_product_of(self, vector):
+        """calculate the cross product and return the vector"""
+        print self, vector
+        return Vector([0, 0, 0])
+
+    def parallelogram_area_of(self, vector):
+        """calculate the area of the parallelogram from vector"""
+        print self, vector
+        return 0.0
+
     def __str__(self):
         numbers = [round(x, 4) for x in self.coordinates]
         return 'Vector: {}'.format(numbers)

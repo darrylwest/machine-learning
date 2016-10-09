@@ -78,6 +78,20 @@ class VectorTests(unittest.TestCase):
             [6.404,-9.144, 2.759, 8.718]
         ]
 
+    def create_cross_product_data(self):
+        return [
+            [1, -7, 1],
+            [5, 2, 4],
+            [5, 3, 2],
+            [-1, 0, 3],
+            [8.462, 7.893, -8.187],
+            [6.984, -5.975, 4.778],
+            [-8.987,-9.838, 5.031],
+            [-4.268,-1.861,-8.866],
+            [1.5, 9.547, 3.691],
+            [-6.007, 0.124, 5.772]
+        ]
+
     def setUp(self):
         pass
     
@@ -247,6 +261,36 @@ class VectorTests(unittest.TestCase):
         self.assertTrue(str(para), str(Vector([1.9685, -2.8108, 0.8481, 2.6798])))
         self.assertTrue(str(perp), str(Vector([1.0405, -3.3612, 2.8439, -5.1898])))
 
+    def test_cross_product(self):
+        """test the cross product"""
+        data = self.create_cross_product_data()
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        xp = v1.cross_product_of(v2)
+        print 'v1/v2/xp: ', v1, v2, xp
+        # self.assertEqual(str(xp), str(Vector([-30, 1, 37])))
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        xp = v1.cross_product_of(v2)
+        print 'v1/v2/xp: ', v1, v2, xp
+        # self.assertEqual(str(xp), str(Vector[9, -13, 3]))
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        xp = v1.cross_product_of(v2)
+        print 'v1/v2/xp: ', v1, v2, xp
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        area = v1.parallelogram_area_of(v2)
+        print 'v1/v2/xp: ', v1, v2, area
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))
+        area = v1.parallelogram_area_of(v2) / 2.0
+        print 'v1/v2/xp: ', v1, v2, area
 
 if __name__ == '__main__':
     unittest.main()
