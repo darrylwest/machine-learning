@@ -90,12 +90,10 @@ class Vector(object):
     def parallel_to(self, vector):
         """return true if the two vectors are parallel"""
 
-        print self.is_zero(), vector.is_zero()
         if self.is_zero() or vector.is_zero():
             return True
 
         angle = self.angle_with(vector)
-        print 'angle: ', angle
 
         return angle == 0 or angle == pi
 
