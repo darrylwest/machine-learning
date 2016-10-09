@@ -2,7 +2,7 @@
 """Vector utilities"""
 
 from decimal import Decimal, getcontext
-from math import acos, degrees, sqrt
+from math import acos, degrees, sqrt, pi
 
 getcontext().prec = 30
 
@@ -73,7 +73,7 @@ class Vector(object):
         """return the dot product"""
         return sum([x * y for x, y in zip(self.coordinates, vector.coordinates)])
 
-    def angle(self, vector, in_degrees=False):
+    def angle_with(self, vector, in_degrees=False):
         """return the angle between two vectors in radians"""
 
         try:
@@ -88,12 +88,24 @@ class Vector(object):
         except Exception as ex:
             raise ex
 
-    def parallel(self, vector):
+    def parallel_to(self, vector):
         """return true if the two vectors are parallel"""
-        # pylint: disable=W0612
-        diff = self.dot_product(vector)
 
-        return True
+        if self.is_zero() or vector.is_zero:
+            return True
+
+        angle = self.angle_with(vector)
+        print 'angle: ', angle
+
+        return angle == 0 or angle == pi
+
+    def is_orthogonal_to(self, vector, tolerance=1e-10):
+        """return true if the vectors are perpendicular"""
+        return abs(self.dot_product(vector)) < tolerance
+
+    def is_zero(self, tolerance=1e-10):
+        """return true if my vertor is very close to zero"""
+        return self.magnitude() < tolerance
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
@@ -104,9 +116,9 @@ class Vector(object):
 if __name__ == '__main__':
     V = Vector([3.183, -7.627])
     W = Vector([-2.668, 5.319])
-    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle(W)
+    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle_with(W)
 
     V = Vector([7.35, 0.221, 5.188])
     W = Vector([2.751, 8.259, 3.985])
 
-    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle(W, True)
+    print V, W, 'dot: ', V.dot_product(W), ', angle: ', V.angle_with(W, True)
