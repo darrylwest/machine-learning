@@ -165,10 +165,11 @@ class Vector(object):
             scoor[0] * vcoor[1] - scoor[1] * vcoor[0]
         ])
 
-    def parallelogram_area_of(self, vector):
+    def area(self):
         """calculate the area of the parallelogram from vector"""
-        print self, vector
-        return 0.0
+        squared = self.sqr()
+
+        return sqrt(sum(squared.coordinates))
 
     def __str__(self):
         numbers = [round(x, 4) for x in self.coordinates]

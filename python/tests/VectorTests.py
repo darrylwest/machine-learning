@@ -274,6 +274,8 @@ class VectorTests(unittest.TestCase):
         v2 = Vector(data.pop(0))
         xp = v1.cross_product_of(v2)
         self.assertEqual(str(xp), str(Vector([9.0, -13.0, 3.0])))
+        area = xp.area()
+        self.assertEqual(round(area, 5), 16.09348)
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
@@ -282,13 +284,16 @@ class VectorTests(unittest.TestCase):
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        area = v1.parallelogram_area_of(v2)
-        print 'v1/v2/xp: ', v1, v2, area
+        xp = v1.cross_product_of(v2)
+        area = xp.area()
+
+        self.assertEqual(round(area, 5), 142.12222)
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        area = v1.parallelogram_area_of(v2) / 2.0
-        print 'v1/v2/xp: ', v1, v2, area
+        xp = v1.cross_product_of(v2)
+        area = xp.area() / 2.0
+        self.assertEqual(round(area, 5), 42.56494)
 
 if __name__ == '__main__':
     unittest.main()
