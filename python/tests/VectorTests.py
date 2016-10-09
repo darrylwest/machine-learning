@@ -10,6 +10,20 @@ class VectorTests(unittest.TestCase):
     """Vector Tests"""
 
     # simulate the fixture data
+    def create_plus_minus_data(self):
+        return [
+            [8.218, -9.341],
+            [-1.129, 2.111],
+            [7.119, 8.215],
+            [-8.223, 0.878]
+        ]
+    
+    def create_scalar_data(self):
+        return [
+            7.41,
+            [1.671, -1.012, -0.318]
+        ]
+
     def create_parallel_orthogonal_data(self):
         return [
             [-7.579, -7.88],
@@ -52,13 +66,17 @@ class VectorTests(unittest.TestCase):
         w = Vector(v.coordinates)
         self.assertEqual(v, w)
 
-    def test_plus(self):
+    def test_plus_minus(self):
         """test vector addition"""
-        pass
+        data = self.create_plus_minus_data()
 
-    def test_minus(self):
-        """test vector subtraction"""
-        pass
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))        
+        self.assertEqual(str(v1.plus(v2)), str(Vector([7.089, -7.23])))
+
+        v1 = Vector(data.pop(0))
+        v2 = Vector(data.pop(0))        
+        self.assertEqual(str(v1.minus(v2)), str(Vector([15.342, 7.337])))
 
     def test_times(self):
         """test vector scalar multiplication"""
@@ -91,7 +109,7 @@ class VectorTests(unittest.TestCase):
     def test_direction(self):
         """test the vector direction"""
         pass
-        
+
     def test_dot_product(self):
         """tset the dot product"""
         data = self.create_dot_product_data()

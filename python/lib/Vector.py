@@ -65,6 +65,7 @@ class Vector(object):
         try:
             magnitude = self.magnitude()
             return self.times(Decimal('1.0')/magnitude)
+
         except ZeroDivisionError:
             raise self.CANNOT_NORMALIZE_ZERO_VECTOR
 
