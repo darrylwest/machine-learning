@@ -80,7 +80,11 @@ class VectorTests(unittest.TestCase):
 
     def test_times(self):
         """test vector scalar multiplication"""
-        pass
+        data = self.create_scalar_data()
+
+        scalar = data.pop(0)
+        v1 = Vector(data.pop(0))
+        self.assertEqual(str(v1.times(scalar)), str(Vector([12.3821, -7.4989, -2.3564])))
 
     def test_divide(self):
         """test vector scalar division"""

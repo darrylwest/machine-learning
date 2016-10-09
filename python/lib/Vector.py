@@ -38,7 +38,7 @@ class Vector(object):
 
     def times(self, scalar):
         """scalar multiply"""
-        return Vector([scalar * x for x in self.coordinates])
+        return Vector([Decimal(scalar) * x for x in self.coordinates])
 
     def divide(self, scalar):
         """scalar divide"""
