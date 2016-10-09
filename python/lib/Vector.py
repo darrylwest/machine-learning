@@ -80,7 +80,7 @@ class Vector(object):
         except ZeroDivisionError:
             raise Exception('cannot normalize the zero vector')
 
-    def dot_product(self, vector):
+    def dot(self, vector):
         """return the dot product"""
         return sum([x * y for x, y in zip(self.coordinates, vector.coordinates)])
 
@@ -92,7 +92,7 @@ class Vector(object):
             uv2 = vector.normalized()
 
             # acos throws if not roundedq
-            dot = round(uv1.dot_product(uv2), 14)
+            dot = round(uv1.dot(uv2), 14)
 
             angle = acos(dot)
 
@@ -119,7 +119,7 @@ class Vector(object):
 
     def is_orthogonal_to(self, vector, tolerance=1e-10):
         """return true if the vectors are perpendicular"""
-        return abs(self.dot_product(vector)) < tolerance
+        return abs(self.dot(vector)) < tolerance
 
     def is_zero(self, tolerance=1e-10):
         """return true if my vertor is very close to zero"""
@@ -141,7 +141,7 @@ class Vector(object):
         """calculate the component parallel to the basis"""
         try:
             uvec = basis.normalized()
-            weight = self.dot_product(uvec)
+            weight = self.dot(uvec)
             return uvec.times(weight)
 
         except ValueError as exe:

@@ -166,21 +166,21 @@ class VectorTests(unittest.TestCase):
         v1 = Vector(data.pop(0))
         self.assertEqual(str(v1.direction()), str(Vector([0.3404, 0.53, -0.7766])))
 
-    def test_dot_product(self):
+    def test_dot(self):
         """tset the dot product"""
         data = self.create_dot_product_data()
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertEqual(round(v1.dot_product(v2), 3), -41.382)
+        self.assertEqual(round(v1.dot(v2), 3), -41.382)
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertEqual(round(v1.dot_product(v2), 3), 56.397)
+        self.assertEqual(round(v1.dot(v2), 3), 56.397)
 
         v1 = Vector(data.pop(0))
         v2 = Vector(data.pop(0))
-        self.assertEqual(round(v1.dot_product(v2), 3), 12.0)
+        self.assertEqual(round(v1.dot(v2), 3), 12.0)
 
     def test_angle_with(self):
         """test the angle with"""
