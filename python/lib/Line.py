@@ -101,7 +101,7 @@ class Line(object):
 
     @staticmethod
     def first_nonzero_index(iterable):
-        """first nonzero index"""
+        """find and return the first nonzero index"""
 
         for k, item in enumerate(iterable):
             if not MyDecimal(item).is_near_zero():
@@ -111,7 +111,7 @@ class Line(object):
 
 
 class MyDecimal(Decimal):
-    """my decimal"""
+    """my decimal helper returns true/false if less than eps"""
     def is_near_zero(self, eps=1e-10):
         """is near zero"""
         return abs(self) < eps

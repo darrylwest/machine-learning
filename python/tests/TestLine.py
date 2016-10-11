@@ -7,7 +7,9 @@ Vector = imp.load_source('Vector', './lib/Vector.py')
 Line = imp.load_source('Line', './lib/Line.py')
 
 from Vector import Vector
-from Line import Line
+from Line import Line, MyDecimal
+
+from decimal import Decimal
 
 class LineTests(unittest.TestCase):
     """Line Tests"""
@@ -33,6 +35,14 @@ class LineTests(unittest.TestCase):
         line = Line(v.coordinates)
         print 'line: ', line
         self.assertFalse( False )
+
+    def test_mydecimal(self):
+        d = MyDecimal(Decimal(0.4))
+        self.assertFalse(d.is_near_zero())
+        d = MyDecimal(Decimal(-0.000004))
+        self.assertFalse(d.is_near_zero())
+        d = MyDecimal(Decimal(0.000))
+        self.assertTrue(d.is_near_zero())
 
     def test_is_parallel(self):
         self.assertFalse( 1 == 2 )
