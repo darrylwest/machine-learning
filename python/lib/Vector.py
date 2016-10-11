@@ -101,7 +101,7 @@ class Vector(object):
             else:
                 return angle
 
-        except ValueError as exe:
+        except Exception as exe:
             if str(exe) == self.CANNOT_NORMALIZE_ZERO_VECTOR:
                 raise Exception('Cannot compute an angle with a zero vector')
             else:

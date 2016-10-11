@@ -1,11 +1,14 @@
+"""Line class"""
+
 from decimal import Decimal, getcontext
 
-from vector import Vector
+from lib.Vector import Vector
 
 getcontext().prec = 30
 
-
 class Line(object):
+    """Line class"""
+
 
     NO_NONZERO_ELTS_FOUND_MSG = 'No nonzero elements found'
 
@@ -25,10 +28,12 @@ class Line(object):
 
 
     def set_basepoint(self):
+        """set the line's basepoint"""
+
         try:
             n = self.normal_vector
             c = self.constant_term
-            basepoint_coords = ['0']*self.dimension
+            basepoint_coords = ['0'] * self.dimension
 
             initial_index = Line.first_nonzero_index(n)
             initial_coefficient = n[initial_index]
@@ -36,18 +41,19 @@ class Line(object):
             basepoint_coords[initial_index] = c/initial_coefficient
             self.basepoint = Vector(basepoint_coords)
 
-        except Exception as e:
-            if str(e) == Line.NO_NONZERO_ELTS_FOUND_MSG:
+        except Exception as ex:
+            if str(ex) == Line.NO_NONZERO_ELTS_FOUND_MSG:
                 self.basepoint = None
             else:
-                raise e
-
+                raise ex
 
     def __str__(self):
 
         num_decimal_places = 3
 
         def write_coefficient(coefficient, is_initial_term=False):
+            """write the coefficient"""
+
             coefficient = round(coefficient, num_decimal_places)
             if coefficient % 1 == 0:
                 coefficient = int(coefficient)
@@ -71,8 +77,12 @@ class Line(object):
 
         try:
             initial_index = Line.first_nonzero_index(n)
-            terms = [write_coefficient(n[i], is_initial_term=(i==initial_index)) + 'x_{}'.format(i+1)
-                     for i in range(self.dimension) if round(n[i], num_decimal_places) != 0]
+            terms = [
+                write_coefficient(n[i], \
+                is_initial_term=(i == initial_index)) + 'x_{}'.format(i+1) \
+                for i in range(self.dimension) \
+                if round(n[i], num_decimal_places) != 0
+            ]
             output = ' '.join(terms)
 
         except Exception as e:
@@ -91,12 +101,17 @@ class Line(object):
 
     @staticmethod
     def first_nonzero_index(iterable):
+        """first nonzero index"""
+
         for k, item in enumerate(iterable):
             if not MyDecimal(item).is_near_zero():
                 return k
+
         raise Exception(Line.NO_NONZERO_ELTS_FOUND_MSG)
 
 
 class MyDecimal(Decimal):
+    """my decimal"""
     def is_near_zero(self, eps=1e-10):
+        """is near zero"""
         return abs(self) < eps
