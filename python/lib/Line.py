@@ -2,13 +2,12 @@
 
 from decimal import Decimal, getcontext
 
-from lib.Vector import Vector
+from Vector import Vector
 
 getcontext().prec = 30
 
 class Line(object):
     """Line class"""
-
 
     NO_NONZERO_ELTS_FOUND_MSG = 'No nonzero elements found'
 
@@ -18,14 +17,15 @@ class Line(object):
         if not normal_vector:
             all_zeros = ['0']*self.dimension
             normal_vector = Vector(all_zeros)
+        
         self.normal_vector = normal_vector
 
         if not constant_term:
             constant_term = Decimal('0')
+        
         self.constant_term = Decimal(constant_term)
 
         self.set_basepoint()
-
 
     def set_basepoint(self):
         """set the line's basepoint"""
