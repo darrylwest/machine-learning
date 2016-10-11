@@ -1,6 +1,7 @@
 FILES=lib/*.py
 TESTFILES=tests/*.py
 LINT=pylint --rcfile .pylintrc
+NOSE=/usr/local/bin/nosetests
 
 all:
 	@make test
@@ -9,7 +10,7 @@ lint:
 	@( $(LINT) $(FILES) )
 
 test:
-	@( python $(TESTFILES) )
+	@( nosetests $(TESTFILES) )
 	@( echo "linting..." )
 	@( make lint | tail -4 )
 
