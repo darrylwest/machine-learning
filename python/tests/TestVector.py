@@ -3,6 +3,9 @@
 import imp
 import unittest
 
+from decimal import Decimal, getcontext
+getcontext().prec = 30
+
 Vector = imp.load_source('Vector', './lib/Vector.py')
 from Vector import Vector
 
@@ -128,7 +131,11 @@ class VectorTests(unittest.TestCase):
 
     def test_divide(self):
         """test vector scalar division"""
-        pass
+        v = Vector([2, 4, 6, 8])
+        v = v.divide(2)
+
+        expects = (Decimal(1), Decimal(2), Decimal(3), Decimal(4))
+        self.assertEqual(v.coordinates, expects)
 
     def test_pow(self):
         """test vector raised to the power of n"""
@@ -296,5 +303,3 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(round(area, 5), 42.56494)
 
 
-if __name__ == '__main__':
-    unittest.main()

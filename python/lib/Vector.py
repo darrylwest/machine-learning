@@ -53,10 +53,6 @@ class Vector(object):
         """square the elements"""
         return self.pow(2)
 
-    def sum(self):
-        """sum the elements"""
-        return sum(self.coordinates)
-
     def magnitude(self):
         """return the vector's magnitude"""
         return Decimal(sqrt(sum([x**2 for x in self.coordinates])))
@@ -72,7 +68,6 @@ class Vector(object):
 
     def direction(self):
         """return the vector direction"""
-
         try:
             mag = self.magnitude()
             return self.divide(mag)
@@ -170,14 +165,6 @@ class Vector(object):
         squared = self.sqr()
 
         return sqrt(sum(squared.coordinates))
-
-    # move this to a matrix class
-    def det(self):
-        """calculate the determinant of self"""
-        # [ a b ]
-        # [ c d ] = ad - bc
-
-        pass
 
     def __str__(self):
         numbers = [round(x, 4) for x in self.coordinates]

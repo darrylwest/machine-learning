@@ -6,6 +6,10 @@
 * [python pep-8](https://www.python.org/dev/peps/pep-0008/)
 * [Python Structure Guide](http://docs.python-guide.org/en/latest/writing/structure/)
 
+## Tests
+
+Install nose: easy_install nose _-or-_ pip install nose
+
 ## Lint
 
 use pylint out of the box: sudo pip install pylint
