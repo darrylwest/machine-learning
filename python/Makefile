@@ -11,7 +11,7 @@ lint:
 test:
 	@( python $(TESTFILES) )
 	@( echo "linting..." )
-	@( make lint )
+	@( make lint | tail -4 )
 
 watch:
 	@( ./watcher.js )

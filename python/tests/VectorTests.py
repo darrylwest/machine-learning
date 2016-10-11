@@ -4,7 +4,7 @@ import imp
 import unittest
 
 Vector = imp.load_source('Vector', './lib/Vector.py')
-from Vector import Vector
+from lib.Vector import Vector
 
 class VectorTests(unittest.TestCase):
     """Vector Tests"""
