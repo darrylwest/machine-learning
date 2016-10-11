@@ -16,9 +16,9 @@ class Line(object):
 
         if not normal_vector:
             all_zeros = ['0']*self.dimension
-            normal_vector = Vector(all_zeros)
-
-        self.normal_vector = normal_vector
+            self.normal_vector = Vector(all_zeros)
+        else:
+            self.normal_vector = Vector(normal_vector)
 
         if not constant_term:
             constant_term = Decimal('0')
@@ -31,7 +31,7 @@ class Line(object):
         """set the line's basepoint"""
 
         try:
-            n = self.normal_vector
+            n = self.normal_vector.coordinates
             c = self.constant_term
             basepoint_coords = ['0'] * self.dimension
 
@@ -73,7 +73,7 @@ class Line(object):
 
             return output
 
-        n = self.normal_vector
+        n = self.normal_vector.coordinates
 
         try:
             initial_index = Line.first_nonzero_index(n)
@@ -109,6 +109,9 @@ class Line(object):
 
         raise Exception(Line.NO_NONZERO_ELTS_FOUND_MSG)
 
+    def is_parallel_to(self, line):
+        """determine if self is parallel to vector using normal orthoginals"""
+        return self.normal_vector.is_parallel_to(line.normal_vector)
 
 class MyDecimal(Decimal):
     """my decimal helper returns true/false if less than eps"""

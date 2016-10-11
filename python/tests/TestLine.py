@@ -15,6 +15,7 @@ class LineTests(unittest.TestCase):
     """Line Tests"""
 
     def create_line_data(self):
+        """data defined as Ax + By = k"""
         return [
             [4.046, 2.836, 1.21],
             [10.115, 7.09, 3.025],
@@ -36,6 +37,30 @@ class LineTests(unittest.TestCase):
         print 'line: ', line
         self.assertFalse( False )
 
+    def test_is_parallel(self):
+        data = self.create_line_data()
+
+        ax1, by1, k1 = data.pop(0)
+        ax2, by2, k2 = data.pop(0)
+
+        v1 = Vector([ax1, by1])
+        v2 = Vector([ax2, by2])
+
+        line1 = Line(v1.coordinates, k1)
+        line2 = Line(v2.coordinates, k2)
+
+        print 'line1 ', line1, line1.normal_vector
+        print 'line2 ', line2, line2.normal_vector
+
+        self.assertTrue( v1.is_parallel_to( v2 ) )
+        self.assertTrue(line1.is_parallel_to(line2))
+
+    def test_lines_equal(self):
+        pass
+
+    def test_intersection(self):
+        pass
+
     def test_mydecimal(self):
         d = MyDecimal(Decimal(0.4))
         self.assertFalse(d.is_near_zero())
@@ -43,13 +68,4 @@ class LineTests(unittest.TestCase):
         self.assertFalse(d.is_near_zero())
         d = MyDecimal(Decimal(0.000))
         self.assertTrue(d.is_near_zero())
-
-    def test_is_parallel(self):
-        self.assertFalse( 1 == 2 )
-
-    def test_lines_equal(self):
-        pass
-
-    def test_intersection(self):
-        pass
 
