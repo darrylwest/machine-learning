@@ -102,7 +102,6 @@ class VectorTests(unittest.TestCase):
         pass
 
     def test_instance(self):
-        """test the vector instance"""
         data = [1, 2, 3]
         v = Vector(data)
         self.assertEqual(v.dimension, len(data))
@@ -110,7 +109,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(v, w)
 
     def test_plus_minus(self):
-        """test vector addition"""
         data = self.create_plus_minus_data()
 
         v1 = Vector(data.pop(0))
@@ -122,7 +120,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(str(v1.minus(v2)), str(Vector([15.342, 7.337])))
 
     def test_times(self):
-        """test vector scalar multiplication"""
         data = self.create_scalar_data()
 
         scalar = data.pop(0)
@@ -130,7 +127,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(str(v1.times(scalar)), str(Vector([12.3821, -7.4989, -2.3564])))
 
     def test_divide(self):
-        """test vector scalar division"""
         v = Vector([2, 4, 6, 8])
         v = v.divide(2)
 
@@ -138,21 +134,18 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(v.coordinates, expects)
 
     def test_pow(self):
-        """test vector raised to the power of n"""
         v = Vector([3, 2])
         v = v.pow(3)
         expects = (Decimal(27), Decimal(2*2*2))
         self.assertEqual(v.coordinates, expects)
 
     def test_sqr(self):
-        """test vector squared"""
         v = Vector([2, 4])
         v = v.sqr()
         expects = (Decimal(4), Decimal(16))
         self.assertEqual(v.coordinates, expects)
 
     def test_magnitude(self):
-        """test vector's magnitude"""
         data = self.create_magnitude_data()
 
         v1 = Vector(data.pop(0))
@@ -162,11 +155,9 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(round(v1.magnitude(), 9), 10.884187567)
 
     def test_normalize(self):
-        """test the normalization of a vector"""
         pass
     
     def test_direction(self):
-        """test the vector direction"""
         data = self.create_direction_data()
 
         v1 = Vector(data.pop(0))
@@ -176,7 +167,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(str(v1.direction()), str(Vector([0.3404, 0.53, -0.7766])))
 
     def test_dot(self):
-        """tset the dot product"""
         data = self.create_dot_product_data()
 
         v1 = Vector(data.pop(0))
@@ -192,7 +182,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(round(v1.dot(v2), 3), 12.0)
 
     def test_angle_with(self):
-        """test the angle with"""
         data = self.create_angle_data()
 
         v1 = Vector(data.pop(0))
@@ -208,7 +197,6 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(round(v1.angle_with(v2, True), 3), 45.585)
 
     def test_orthogonal(self):
-        """insure that the datasets are orthogonal or not"""
         data = self.create_parallel_orthogonal_data()
 
         v1 = Vector(data.pop(0))
@@ -228,7 +216,6 @@ class VectorTests(unittest.TestCase):
         self.assertTrue(v1.is_orthogonal_to(v2))
         
     def test_is_parallel(self):
-        """insure that the datasets are parallel or not"""
         
         data = self.create_parallel_orthogonal_data()
 
@@ -250,7 +237,6 @@ class VectorTests(unittest.TestCase):
         self.assertTrue(v1.is_parallel_to(v2))
 
     def test_projection(self):
-        """test vector projection"""
         data = self.create_projection_data()
 
         vector = Vector(data.pop(0))
@@ -271,7 +257,6 @@ class VectorTests(unittest.TestCase):
         self.assertTrue(str(perp), str(Vector([1.0405, -3.3612, 2.8439, -5.1898])))
 
     def test_cross_product(self):
-        """test the cross product"""
         data = self.create_cross_product_data()
 
         v1 = Vector(data.pop(0))

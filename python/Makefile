@@ -1,7 +1,7 @@
 FILES=lib/*.py
 TESTFILES=tests/
 LINT=pylint --rcfile .pylintrc
-NOSE=/usr/local/bin/nosetests --cover-package=lib --with-coverage
+NOSE=/usr/local/bin/nosetests --cover-package=lib --with-coverage --verbose
 
 all:
 	@make test

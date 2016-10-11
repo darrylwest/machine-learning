@@ -19,5 +19,5 @@ use pylint out of the box: sudo pip install pylint
 [Coverage.py](https://pypi.python.org/pypi/coverage)
 sudo pip install coverage
 
-###### darryl.west@raincitysoftware.com | Version 2016.10.09
+###### darryl.west@raincitysoftware.com | Version 2016.10.11
 

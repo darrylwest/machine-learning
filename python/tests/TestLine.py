@@ -31,12 +31,13 @@ class LineTests(unittest.TestCase):
     def test_instance(self):
         v = Vector([2, 3])
         line = Line(v.coordinates)
+        print 'line: ', line
         self.assertFalse( False )
 
-    def test_is_parallelf(self):
+    def test_is_parallel(self):
         self.assertFalse( 1 == 2 )
 
-    def test_lines_qual(self):
+    def test_lines_equal(self):
         pass
 
     def test_intersection(self):
