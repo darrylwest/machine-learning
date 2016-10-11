@@ -139,15 +139,17 @@ class VectorTests(unittest.TestCase):
 
     def test_pow(self):
         """test vector raised to the power of n"""
-        pass
+        v = Vector([3, 2])
+        v = v.pow(3)
+        expects = (Decimal(27), Decimal(2*2*2))
+        self.assertEqual(v.coordinates, expects)
 
     def test_sqr(self):
         """test vector squared"""
-        pass
-
-    def test_sum(self):
-        """test vector summation"""
-        pass
+        v = Vector([2, 4])
+        v = v.sqr()
+        expects = (Decimal(4), Decimal(16))
+        self.assertEqual(v.coordinates, expects)
 
     def test_magnitude(self):
         """test vector's magnitude"""
