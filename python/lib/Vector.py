@@ -171,6 +171,14 @@ class Vector(object):
 
         return sqrt(sum(squared.coordinates))
 
+    # move this to a matrix class
+    def det(self):
+        """calculate the determinant of self"""
+        # [ a b ]
+        # [ c d ] = ad - bc
+
+        pass
+
     def __str__(self):
         numbers = [round(x, 4) for x in self.coordinates]
         return 'Vector: {}'.format(numbers)

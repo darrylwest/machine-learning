@@ -295,5 +295,6 @@ class VectorTests(unittest.TestCase):
         area = xp.area() / 2.0
         self.assertEqual(round(area, 5), 42.56494)
 
+
 if __name__ == '__main__':
     unittest.main()
