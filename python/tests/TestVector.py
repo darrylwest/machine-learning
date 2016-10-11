@@ -155,7 +155,10 @@ class VectorTests(unittest.TestCase):
         self.assertEqual(round(v1.magnitude(), 9), 10.884187567)
 
     def test_normalize(self):
-        pass
+        data = self.create_magnitude_data()
+        v1 = Vector(data.pop(0))
+        v2 = v1.normalized()
+        self.assertEqual(str(v2), "Vector: [-0.0297, 0.9996]")
     
     def test_direction(self):
         data = self.create_direction_data()
