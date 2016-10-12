@@ -12,6 +12,7 @@ class Line(object):
     NO_NONZERO_ELTS_FOUND_MSG = 'No nonzero elements found'
 
     def __init__(self, normal_vector=None, constant_term=None):
+        """normal vector [A, B] and the constant k"""
         self.dimension = 2
 
         if not normal_vector:
@@ -98,6 +99,13 @@ class Line(object):
 
         return output
 
+    def calc_y_intercept(self):
+        """calculate the y value for the x @ 0"""
+        m = self.constant_term / self.normal_vector.coordinates[1]
+
+        y = self.normal_vector.coordinates[1] * m
+
+        return y
 
     @staticmethod
     def first_nonzero_index(iterable):
@@ -112,6 +120,47 @@ class Line(object):
     def is_parallel_to(self, line):
         """determine if self is parallel to vector using normal orthoginals"""
         return self.normal_vector.is_parallel_to(line.normal_vector)
+
+    def is_same_line(self, line):
+        """determine if these are the same lines or just parallel"""
+        same = False
+        if self.normal_vector.is_parallel_to(line.normal_vector):
+            # get the angle between two points
+
+            same = True
+
+        return same
+
+    def calc_xy_intersection(self, line):
+        """calc the xy coordinates of self and line"""
+
+        A, B = self.normal_vector.coordinates
+        C, D = line.normal_vector.coordinates
+
+        k1 = self.constant_term
+        k2 = line.constant_term
+
+        adbc = A * D - B * C
+
+        # x = Dk1 - Bk2 / AD - BC
+        x = ((D * k1) - (B * k2)) / adbc
+        y = ((A * k2) - (C * k1)) / adbc
+
+        return (x, y)
+
+    def calc_intersection(self, line):
+        """calculate the intersection of two non-parallel lines, or if parallel, indicate"""
+        parallel = self.is_parallel_to(line)
+        same = False
+        x = None
+        y = None
+        if parallel:
+            # determine if these are the same lines...abs
+            same = self.is_same_line(line)
+        else:
+            x, y = self.calc_xy_intersection(line)
+
+        return (parallel, same, x, y)
 
 class MyDecimal(Decimal):
     """my decimal helper returns true/false if less than eps"""
