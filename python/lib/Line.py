@@ -122,6 +122,14 @@ class Line(object):
         return self.normal_vector.is_parallel_to(line.normal_vector)
 
     def __eq__(self, line):
+        if self.normal_vector.is_zero():
+            if not line.normal_vector.is_zero():
+                return False
+            else:
+                return MyDecimal(self.constant_term - line.constant_term).is_near_zero
+        elif line.normal_vector.is_zero():
+            return False
+
         if not self.is_parallel_to(line):
             return False
 
