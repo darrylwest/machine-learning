@@ -99,14 +99,6 @@ class Line(object):
 
         return output
 
-    def calc_y_intercept(self):
-        """calculate the y value for the x @ 0"""
-        m = self.constant_term / self.normal_vector.coordinates[1]
-
-        y = self.normal_vector.coordinates[1] * m
-
-        return y
-
     @staticmethod
     def first_nonzero_index(iterable):
         """find and return the first nonzero index"""

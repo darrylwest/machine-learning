@@ -117,12 +117,28 @@ class Plane(object):
 
         raise Exception(Plane.NO_NONZERO_ELTS_FOUND_MSG)
 
-    def is_parallel_to(self, line):
-        """determine if self is parallel to vector using normal orthoginals"""
-        pass
+    def is_parallel_to(self, plane):
+        """determine if self is parallel to vector using normal"""
+        return self.normal_vector.is_parallel_to(plane.normal_vector)
 
-    def __eq__(self, line):
-        return False
+    def __eq__(self, plane):
+        if self.normal_vector.is_zero():
+            if not plane.normal_vector.is_zero():
+                return False
+            else:
+                return MyDecimal(self.constant_term - plane.constant_term).is_near_zero
+        elif plane.normal_vector.is_zero():
+            return False
+
+        if not self.is_parallel_to(plane):
+            return False
+
+        A = self.basepoint
+        B = plane.basepoint
+
+        diff = A.minus(B)
+
+        return diff.is_orthogonal_to(self.normal_vector)
 
 class MyDecimal(Decimal):
     """my decimal helper returns true/false if less than eps"""
