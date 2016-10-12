@@ -121,15 +121,16 @@ class Line(object):
         """determine if self is parallel to vector using normal orthoginals"""
         return self.normal_vector.is_parallel_to(line.normal_vector)
 
-    def is_same_line(self, line):
-        """determine if these are the same lines or just parallel"""
-        same = False
-        if self.normal_vector.is_parallel_to(line.normal_vector):
-            # get the angle between two points
+    def __eq__(self, line):
+        if not self.is_parallel_to(line):
+            return False
 
-            same = True
+        A = self.basepoint
+        B = line.basepoint
 
-        return same
+        diff = A.minus(B)
+
+        return diff.is_orthogonal_to(self.normal_vector)
 
     def calc_xy_intersection(self, line):
         """calc the xy coordinates of self and line"""
@@ -156,7 +157,7 @@ class Line(object):
         y = None
         if parallel:
             # determine if these are the same lines...abs
-            same = self.is_same_line(line)
+            same = self == line
         else:
             x, y = self.calc_xy_intersection(line)
 

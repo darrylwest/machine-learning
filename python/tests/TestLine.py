@@ -87,8 +87,29 @@ class LineTests(unittest.TestCase):
         line = Line([ax1, by1], k1)
 
 
-    def test_lines_equal(self):
-        pass
+    def test_equal(self):
+        data = self.create_line_data()
+
+        ax1, by1, k1 = data.pop(0)
+        ax2, by2, k2 = data.pop(0)
+
+        line1 = Line([ax1, by1], k1)
+        line2 = Line([ax2, by2], k2)
+
+        self.assertTrue(line1 == line2)
+
+        ax1, by1, k1 = data.pop(0)
+        ax2, by2, k2 = data.pop(0)
+        line1 = Line([ax1, by1], k1)
+        line2 = Line([ax2, by2], k2)
+        self.assertFalse(line1 == line2)
+
+        ax1, by1, k1 = data.pop(0)
+        ax2, by2, k2 = data.pop(0)
+        line1 = Line([ax1, by1], k1)
+        line2 = Line([ax2, by2], k2)
+        self.assertFalse(line1 == line2)
+
 
     def test_intersection(self):
         data = self.create_line_data()
